@@ -188,3 +188,6 @@ const weatherWorkflow = createWorkflow({
 weatherWorkflow.commit();
 
 export { weatherWorkflow };
+
+// Export search workflow
+export * from './search-workflow';

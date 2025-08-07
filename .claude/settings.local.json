@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm add:*)",
+      "Bash(mkdir:*)",
+      "Bash(pnpm test:*)",
+      "Bash(mv:*)",
+      "Bash(gh repo clone:*)",
+      "Bash(npm run test:run:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:mastra.ai)"
+    ],
+    "deny": []
+  }
+}

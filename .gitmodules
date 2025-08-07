@@ -1,0 +1,3 @@
+[submodule "sourcy-models"]
+	path = sourcy-models
+	url = https://github.com/Sourcy-Global/sourcy-models.git

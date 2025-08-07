@@ -1,22 +1,69 @@
-# Weather Agent Template
+# Weather & Search Agents - Mastra Sample
 
-This is a template project that demonstrates how to create a weather agent using the Mastra framework. The agent can provide weather information and forecasts based on user queries.
+A sample application built with the [Mastra](https://mastra.ai) framework, demonstrating AI-powered agents, tools, and workflows with Test-Driven Development setup. Features both weather and search functionality.
 
-## Overview
+## Quick Start
 
-The Weather Agent template showcases how to:
+1. **Setup Environment**
+   ```bash
+   cp .env.example .env
+   # Add your API keys to .env:
+   # OPENAI_API_KEY=your_openai_key
+   # SERPER_API_KEY=your_serper_key  (get from https://serper.dev)
+   ```
 
-- Create an AI-powered agent using Mastra framework
-- Implement weather-related workflows
-- Handle user queries about weather conditions
-- Integrate with OpenAI's API for natural language processing
+2. **Install Dependencies**
+   ```bash
+   pnpm install
+   ```
 
-## Setup
+3. **Run Development Server**
+   ```bash
+   pnpm dev
+   ```
 
-1. Copy `.env.example` to `.env` and fill in your API keys.
-2. Install dependencies: `pnpm install`
-3. Run the project: `pnpm dev`.
+4. **Run Tests**
+   ```bash
+   pnpm test
+   ```
 
-## Environment Variables
+## Documentation
 
-- `OPENAI_API_KEY`: Your OpenAI API key. [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+- **[Project Overview](docs/project-overview.md)** - Detailed project description and setup instructions
+- **[Claude Code Guide](docs/CLAUDE.md)** - Instructions for Claude Code AI assistant
+- **[TDD Guide](docs/TDD_EXAMPLE.md)** - Test-Driven Development workflow examples
+
+## Architecture Overview
+
+This project demonstrates:
+
+- **Weather Agent**: Conversational AI assistant using OpenAI GPT-4o
+- **Search Agent**: Intelligent search assistant for web and shopping queries  
+- **Weather Tool**: Integration with Open-Meteo API for real-time weather data
+- **Search Tools**: Web search and shopping search using Serper API
+- **Weather Workflow**: Multi-step process for weather forecasting and activity planning
+- **Search Workflow**: Multi-step process for search and result analysis
+- **Test Suite**: Comprehensive testing setup with Vitest
+
+## Key Features
+
+- 🤖 AI-powered weather and search assistants
+- 🔍 Web search and shopping search capabilities
+- 🔧 Custom tools for API integration
+- 🔄 Multi-step workflows
+- ✅ Test-Driven Development setup
+- 📝 TypeScript with strict mode
+- 🎯 Zod schema validation
+- 📊 Structured result analysis and insights
+
+## Scripts
+
+- `pnpm dev` - Start Mastra development server
+- `pnpm test` - Run tests in watch mode
+- `pnpm test:run` - Run tests once
+- `pnpm test:ui` - Open visual test interface
+- `pnpm test:coverage` - Generate coverage report
+
+## Contributing
+
+See [TDD Guide](docs/TDD_EXAMPLE.md) for development workflow using Test-Driven Development.
