@@ -1,5 +1,5 @@
 {
-  "name": "weather-agent",
+  "name": "sourcing-agent",
   "version": "1.0.0",
   "main": "index.js",
   "private": true,
@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "One Agent, one Workflow and one Tool to bring you the weather in your city.",
+  "description": "Comprehensive sourcing agent with multiple workflows for product research, specification generation, and supplier matching.",
   "type": "module",
   "dependencies": {
     "@ai-sdk/openai": "^1.3.22",

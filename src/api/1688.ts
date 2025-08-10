@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as dotenv from 'dotenv'
-import { retry } from './index.js'
+import { retry } from './utils'
 
 // Load environment variables
 dotenv.config()
@@ -424,7 +424,9 @@ export class Api1688 {
 
 			let formattedResults = `1688 Search Results for: "${keyword}"\n\n`
 			formattedResults += `Total Results: ${response.data.total_count}\n`
-			formattedResults += `Page: ${response.data.page}/${Math.ceil(response.data.total_count / response.data.page_size)}\n\n`
+			formattedResults += `Page: ${response.data.page}/${Math.ceil(
+				response.data.total_count / response.data.page_size
+			)}\n\n`
 
 			if (response.data.items && response.data.items.length > 0) {
 				formattedResults += 'Products:\n'
@@ -437,8 +439,12 @@ export class Api1688 {
 						formattedResults += `   Product URL: ${item.product_url}\n`
 						formattedResults += `   Image: ${item.img}\n`
 						formattedResults += `   Shop: ${item.shop_info.company_name} (${item.shop_info.login_id})\n`
-						formattedResults += `   Location: ${item.delivery_info.area_from.join(', ')}\n`
-						formattedResults += `   Sales: ${item.sale_info.sale_quantity || 'N/A'} (${item.sale_info.orders_count} orders)\n`
+						formattedResults += `   Location: ${item.delivery_info.area_from.join(
+							', '
+						)}\n`
+						formattedResults += `   Sales: ${
+							item.sale_info.sale_quantity || 'N/A'
+						} (${item.sale_info.orders_count} orders)\n`
 						formattedResults += `   Rating: ${item.goods_score}/5\n`
 						formattedResults += `   Tags: ${item.tags.join(', ')}\n`
 						if (item.quantity_prices.length > 0) {
@@ -456,7 +462,11 @@ export class Api1688 {
 
 			return formattedResults
 		} catch (error) {
-			return `Error performing 1688 search for "${keyword}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error performing 1688 search for "${keyword}": ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 
@@ -548,7 +558,9 @@ export class Api1688 {
 			if (data.sku_props && data.sku_props.length > 0) {
 				formattedResults += 'SKU Properties:\n'
 				data.sku_props.forEach(prop => {
-					formattedResults += `  ${prop.prop_name}: ${prop.values.map(v => v.name).join(', ')}\n`
+					formattedResults += `  ${prop.prop_name}: ${prop.values
+						.map(v => v.name)
+						.join(', ')}\n`
 				})
 				formattedResults += '\n'
 			}
@@ -564,7 +576,9 @@ export class Api1688 {
 					formattedResults += `     Weight: ${sku.package_info.weight} kg\n`
 				})
 				if (data.skus.length > 10) {
-					formattedResults += `  ... and ${data.skus.length - 10} more variants\n`
+					formattedResults += `  ... and ${
+						data.skus.length - 10
+					} more variants\n`
 				}
 				formattedResults += '\n'
 			}
@@ -576,7 +590,9 @@ export class Api1688 {
 					formattedResults += `  ${index + 1}. ${img}\n`
 				})
 				if (data.main_imgs.length > 3) {
-					formattedResults += `  ... and ${data.main_imgs.length - 3} more images\n`
+					formattedResults += `  ... and ${
+						data.main_imgs.length - 3
+					} more images\n`
 				}
 				formattedResults += '\n'
 			}
@@ -588,7 +604,11 @@ export class Api1688 {
 
 			return formattedResults
 		} catch (error) {
-			return `Error getting 1688 product details for item ID "${item_id}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error getting 1688 product details for item ID "${item_id}": ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 
@@ -620,7 +640,11 @@ export class Api1688 {
 					details.push(detailResult)
 				} catch (error) {
 					details.push(
-						`Error getting details for item ${item.item_id}: ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+						`Error getting details for item ${item.item_id}: ${
+							error && typeof error === 'object' && 'message' in error
+								? String(error.message)
+								: 'Unknown error'
+						}`
 					)
 				}
 			}
@@ -628,7 +652,11 @@ export class Api1688 {
 			return { searchResults, details }
 		} catch (error) {
 			return {
-				searchResults: `Error performing 1688 search for "${keyword}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`,
+				searchResults: `Error performing 1688 search for "${keyword}": ${
+					error && typeof error === 'object' && 'message' in error
+						? String(error.message)
+						: 'Unknown error'
+				}`,
 				details: [],
 			}
 		}
@@ -647,7 +675,9 @@ export class Api1688 {
 
 			let formattedResults = `1688 English Search Results for: "${keyword}"\n\n`
 			formattedResults += `Total Results: ${response.data.total_count}\n`
-			formattedResults += `Page: ${response.data.page}/${Math.ceil(response.data.total_count / response.data.page_size)}\n\n`
+			formattedResults += `Page: ${response.data.page}/${Math.ceil(
+				response.data.total_count / response.data.page_size
+			)}\n\n`
 
 			if (response.data.items && response.data.items.length > 0) {
 				formattedResults += 'Products:\n'
@@ -660,8 +690,12 @@ export class Api1688 {
 						formattedResults += `   Product URL: ${item.product_url}\n`
 						formattedResults += `   Image: ${item.img}\n`
 						formattedResults += `   Shop: ${item.shop_info.company_name} (${item.shop_info.login_id})\n`
-						formattedResults += `   Location: ${item.delivery_info.area_from.join(', ')}\n`
-						formattedResults += `   Sales: ${item.sale_info.sale_quantity || 'N/A'} (${item.sale_info.orders_count} orders)\n`
+						formattedResults += `   Location: ${item.delivery_info.area_from.join(
+							', '
+						)}\n`
+						formattedResults += `   Sales: ${
+							item.sale_info.sale_quantity || 'N/A'
+						} (${item.sale_info.orders_count} orders)\n`
 						formattedResults += `   Rating: ${item.goods_score}/5\n`
 						formattedResults += `   Tags: ${item.tags.join(', ')}\n`
 						if (item.quantity_prices.length > 0) {
@@ -679,7 +713,11 @@ export class Api1688 {
 
 			return formattedResults
 		} catch (error) {
-			return `Error performing 1688 English search for "${keyword}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error performing 1688 English search for "${keyword}": ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 
@@ -711,7 +749,11 @@ export class Api1688 {
 					details.push(detailResult)
 				} catch (error) {
 					details.push(
-						`Error getting details for item ${item.item_id}: ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+						`Error getting details for item ${item.item_id}: ${
+							error && typeof error === 'object' && 'message' in error
+								? String(error.message)
+								: 'Unknown error'
+						}`
 					)
 				}
 			}
@@ -719,7 +761,11 @@ export class Api1688 {
 			return { searchResults, details }
 		} catch (error) {
 			return {
-				searchResults: `Error performing 1688 English search for "${keyword}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`,
+				searchResults: `Error performing 1688 English search for "${keyword}": ${
+					error && typeof error === 'object' && 'message' in error
+						? String(error.message)
+						: 'Unknown error'
+				}`,
 				details: [],
 			}
 		}
@@ -769,14 +815,22 @@ export class Api1688 {
 			let formatted = `Reviews for Item ID: ${item_id} (Page ${response.data.page}, Sort: ${response.data.sort_type})\n\n`
 			if (response.data.list && response.data.list.length > 0) {
 				response.data.list.forEach((review, idx) => {
-					formatted += `${idx + 1}. [${review.rate_star}★] ${review.user_nick} (${review.feedback_date}):\n   ${review.feedback}\n   SKU: ${review.sku_map}\n\n`
+					formatted += `${idx + 1}. [${review.rate_star}★] ${
+						review.user_nick
+					} (${review.feedback_date}):\n   ${review.feedback}\n   SKU: ${
+						review.sku_map
+					}\n\n`
 				})
 			} else {
 				formatted += 'No reviews found.\n'
 			}
 			return formatted
 		} catch (error) {
-			return `Error getting reviews for item ${item_id}: ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error getting reviews for item ${item_id}: ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 
@@ -816,7 +870,11 @@ export class Api1688 {
 			})
 			return formatted
 		} catch (error) {
-			return `Error getting supplier info: ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error getting supplier info: ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 
@@ -849,14 +907,20 @@ export class Api1688 {
 					formatted += `${idx + 1}. ${img}\n`
 				})
 				if (response.data.detail_imgs.length > 10) {
-					formatted += `... and ${response.data.detail_imgs.length - 10} more images\n`
+					formatted += `... and ${
+						response.data.detail_imgs.length - 10
+					} more images\n`
 				}
 			} else {
 				formatted += 'No description images found.\n'
 			}
 			return formatted
 		} catch (error) {
-			return `Error getting description images for item ${item_id}: ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error getting description images for item ${item_id}: ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 }

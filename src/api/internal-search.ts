@@ -25,12 +25,12 @@
 
 import { QueryTypes } from 'sequelize'
 
-import db from '@/database/connect.js'
-import { ControllerError } from '@/sourcy-models/errors/ControllerError.js'
-import { ModelError } from '@/sourcy-models/errors/ModelError.js'
-import { logQueryError } from '@/sourcy-models/logging/index.js'
-import cohere from '@/utils/cohere.js'
-import { getEmbeddings } from '@/utils/textToEmbedding.js'
+import db from '@/database/connect'
+import { ControllerError } from '@/sourcy-models/errors/ControllerError'
+import { ModelError } from '@/sourcy-models/errors/ModelError'
+import { logQueryError } from '@/sourcy-models/logging/index'
+import cohere from '@/utils/cohere'
+import { getEmbeddings } from '@/utils/textToEmbedding'
 
 export interface GetSimilarProductsParams {
 	query: string

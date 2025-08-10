@@ -8,7 +8,8 @@
       "Bash(gh repo clone:*)",
       "Bash(npm run test:run:*)",
       "Bash(npm install:*)",
-      "WebFetch(domain:mastra.ai)"
+      "WebFetch(domain:mastra.ai)",
+      "Bash(npm test)"
     ],
     "deny": []
   }

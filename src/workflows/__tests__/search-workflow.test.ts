@@ -3,6 +3,15 @@ import { searchWorkflow } from '../search-workflow';
 
 // Mock the search tools
 vi.mock('../../tools/search-tool', () => ({
+  search1688Tool: {
+    execute: vi.fn(),
+  },
+  search1688EnglishTool: {
+    execute: vi.fn(),
+  },
+  searchAlibabaTool: {
+    execute: vi.fn(),
+  },
   webSearchTool: {
     execute: vi.fn(),
   },
@@ -36,7 +45,7 @@ describe('Search Workflow', () => {
   it('should validate input schema', () => {
     const validInput = { 
       query: 'artificial intelligence trends',
-      searchType: 'web',
+      searchType: '1688-en',
       maxResults: 10
     };
     const result = searchWorkflow.inputSchema.safeParse(validInput);
@@ -48,7 +57,7 @@ describe('Search Workflow', () => {
     const result = searchWorkflow.inputSchema.safeParse(minimalInput);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.searchType).toBe('web');
+      expect(result.data.searchType).toBe('1688-en');
       expect(result.data.maxResults).toBe(10);
     }
   });
@@ -73,7 +82,7 @@ describe('Search Workflow', () => {
       processedResults: 'Analysis of search results',
       keyInsights: ['insight 1', 'insight 2'],
       sourceCount: 5,
-      searchType: 'web'
+      searchType: '1688-en'
     };
     const result = searchWorkflow.outputSchema.safeParse(validOutput);
     expect(result.success).toBe(true);
@@ -93,13 +102,13 @@ describe('Search Workflow', () => {
   });
 
   describe('search type validation', () => {
-    const validSearchTypes = ['web', 'shopping'];
+    const validSearchTypes = ['1688', '1688-en', 'alibaba'];
     
     validSearchTypes.forEach(searchType => {
       it(`should accept ${searchType} as valid search type`, () => {
         const input = { 
           query: 'test query',
-          searchType: searchType as 'web' | 'shopping'
+          searchType: searchType as '1688' | '1688-en' | 'alibaba'
         };
         const result = searchWorkflow.inputSchema.safeParse(input);
         expect(result.success).toBe(true);

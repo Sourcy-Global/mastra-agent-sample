@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as dotenv from 'dotenv'
-import { retry } from './index.js'
+import { retry } from './utils'
 
 // Load environment variables
 dotenv.config()
@@ -256,7 +256,9 @@ export class AlibabaAPI {
 
 			let formattedResults = `Alibaba Search Results for: "${keywords}"\n\n`
 			formattedResults += `Total Results: ${response.data.total_count}\n`
-			formattedResults += `Page: ${response.data.page}/${Math.ceil(response.data.total_count / response.data.page_size)}\n`
+			formattedResults += `Page: ${response.data.page}/${Math.ceil(
+				response.data.total_count / response.data.page_size
+			)}\n`
 			formattedResults += `Sort: ${response.data.sort}\n\n`
 
 			if (response.data.items && response.data.items.length > 0) {
@@ -285,7 +287,11 @@ export class AlibabaAPI {
 
 			return formattedResults
 		} catch (error) {
-			return `Error performing Alibaba search for "${keywords}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error performing Alibaba search for "${keywords}": ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 
@@ -307,7 +313,11 @@ export class AlibabaAPI {
 			return { searchResults }
 		} catch (error) {
 			return {
-				searchResults: `Error performing Alibaba search for "${keywords}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`,
+				searchResults: `Error performing Alibaba search for "${keywords}": ${
+					error && typeof error === 'object' && 'message' in error
+						? String(error.message)
+						: 'Unknown error'
+				}`,
 			}
 		}
 	}
@@ -410,7 +420,9 @@ export class AlibabaAPI {
 
 			// Delivery information
 			formattedResults += 'Delivery Information:\n'
-			formattedResults += `  Area From: ${data.delivery_info.area_from || 'N/A'}\n`
+			formattedResults += `  Area From: ${
+				data.delivery_info.area_from || 'N/A'
+			}\n`
 			formattedResults += `  Delivery Days: ${data.delivery_info.delivery_days}\n`
 			formattedResults += `  Unit Weight: ${data.delivery_info.unit_weight} kg\n`
 			formattedResults += `  Unit Size: ${data.delivery_info.unit_size}\n\n`
@@ -435,14 +447,18 @@ export class AlibabaAPI {
 
 			// Review information
 			formattedResults += 'Review Information:\n'
-			formattedResults += `  Rating Star: ${data.review_info.rating_star || 'N/A'}\n`
+			formattedResults += `  Rating Star: ${
+				data.review_info.rating_star || 'N/A'
+			}\n`
 			formattedResults += `  Review Count: ${data.review_info.review_count}\n\n`
 
 			// SKU properties
 			if (data.sku_props && data.sku_props.length > 0) {
 				formattedResults += 'SKU Properties:\n'
 				data.sku_props.forEach(prop => {
-					formattedResults += `  ${prop.prop_name}: ${prop.values.map(v => v.name).join(', ')}\n`
+					formattedResults += `  ${prop.prop_name}: ${prop.values
+						.map(v => v.name)
+						.join(', ')}\n`
 				})
 				formattedResults += '\n'
 			}
@@ -459,7 +475,9 @@ export class AlibabaAPI {
 					formattedResults += `     Stock: ${sku.stock}\n`
 				})
 				if (data.skus.length > 10) {
-					formattedResults += `  ... and ${data.skus.length - 10} more variants\n`
+					formattedResults += `  ... and ${
+						data.skus.length - 10
+					} more variants\n`
 				}
 				formattedResults += '\n'
 			}
@@ -471,7 +489,9 @@ export class AlibabaAPI {
 					formattedResults += `  ${index + 1}. ${img}\n`
 				})
 				if (data.main_imgs.length > 5) {
-					formattedResults += `  ... and ${data.main_imgs.length - 5} more images\n`
+					formattedResults += `  ... and ${
+						data.main_imgs.length - 5
+					} more images\n`
 				}
 				formattedResults += '\n'
 			}
@@ -483,7 +503,11 @@ export class AlibabaAPI {
 
 			return formattedResults
 		} catch (error) {
-			return `Error getting Alibaba product details for URL "${productUrl}": ${error && typeof error === 'object' && 'message' in error ? String(error.message) : 'Unknown error'}`
+			return `Error getting Alibaba product details for URL "${productUrl}": ${
+				error && typeof error === 'object' && 'message' in error
+					? String(error.message)
+					: 'Unknown error'
+			}`
 		}
 	}
 }

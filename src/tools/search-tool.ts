@@ -1,9 +1,9 @@
 import { createTool } from '@mastra/core/tools'
 import { z } from 'zod'
 
-import { alibabaAPI } from '@/api/alibaba.js'
-import { api1688 } from '@/api/1688.js'
-import { serperAPI } from '@/api/serper.js'
+import { alibabaAPI } from '@/api/alibaba'
+import { api1688 } from '@/api/1688'
+import { serperAPI } from '@/api/serper'
 
 interface SearchResult {
 	title: string
